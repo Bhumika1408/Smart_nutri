@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Nutrition App</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="header">
+        <h1>Welcome to Smart Nutrition App</h1>
+        <p>Your personalized meal planner for a healthier lifestyle!</p>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'predict_diet' %}">Predict Diet</a></li>
+
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Meal Plans</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <section class="intro">
+            <h2>About Us</h2>
+            <p>Smart Nutrition is your one-stop solution for adaptive recipe planning based on your health conditions. Track your dietary preferences and plan meals seamlessly!</p>
+        </section>
+
+        <section class="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Personalized meal plans</li>
+                <li>Ingredient substitutions</li>
+                <li>Track your health metrics</li>
+                <li>Access to a wide range of recipes</li>
+            </ul>
+        </section>
+        <section class="trending-recipes">
+            <h2>Trending Recipes</h2>
+            <ul>
+                {% for recipe in trending_recipes %}
+                    <li>
+                        <strong>{{ recipe.RecipeName }}</strong> - 
+                        {{ recipe.Diet }} ({{ recipe.TotalTimeInMins }} mins)
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if not trending_recipes %}
+                <p>No trending recipes available.</p>
+            {% endif %}
+        </section>
+        
+        
+        <section class="cta">
+            <h2>Get Started Today!</h2>
+            <a href="{% url 'predict_diet' %}" class="cta-button">Predict Your Diet</a>
+            <a href="#" class="cta-button">Create Profile</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Smart Nutrition App. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<section class="prediction-form">
+    <h2>Predict Your Meal Plan</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Submit and Predict</button>
+    </form>
+</section>
+
+{% if recipes %}
+    <section class="recommended-recipes">
+        <h2>Recommended Recipes</h2>
+        <ul>
+            {% for recipe in recipes %}
+                <li>
+                    <strong>{{ recipe.RecipeName }}</strong> - 
+                    {{ recipe.Diet }} ({{ recipe.TotalTimeInMins }} mins)
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% else %}
+    <p>No recipes found for the predicted outcome.</p>
+{% endif %}
